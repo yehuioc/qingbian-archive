@@ -1,0 +1,28 @@
+# 请辩（蔡垒磊）多来源归档配置
+# 新环境部署时编辑此文件，然后运行 scripts/qingbian-multisource-archive.ps1
+
+account:
+  name: "请辩"
+  biz: "MzI0MDg5ODA2NQ=="
+  albums:
+    - { id: "2535607207636303873", title: "财富" }
+    - { id: "2545443041122254849", title: "职场" }
+    - { id: "2554225327804317697", title: "问答" }
+    - { id: "2842678137476939777", title: "情感" }
+    - { id: "2536868798008721408", title: "格局" }
+    - { id: "2745537846752641026", title: "认知" }
+    - { id: "4290799518893064196", title: "商业" }
+
+paths:
+  data_root: "./data"
+  state_root: "./state"
+
+zhihu:
+  # 从浏览器导出知乎 cookie JSON 文件，填入路径。
+  # Chrome 插件 "EditThisCookie" 或类似工具可导出。
+  # 留空则跳过知乎抓取。
+  cookie_file: ""
+
+schedule:
+  daily_time: "15:40"
+  timeout_minutes: 50

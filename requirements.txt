@@ -1,0 +1,7 @@
+camoufox[geoip]
+markdownify
+beautifulsoup4
+httpx
+requests
+PyYAML
+miku-ai

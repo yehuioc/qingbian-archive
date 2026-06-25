@@ -1,0 +1,11 @@
+data/
+state/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+cron-legacy/
+automation/
+docs/handoff/
+scripts/legacy/
+scripts/__pycache__/
