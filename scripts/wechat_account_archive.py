@@ -21,10 +21,9 @@ from miku_ai import get_wexin_article
 from miku_ai.spider import MikuSpider
 
 
-WORKSPACE_ROOT = Path(__file__).resolve().parents[4]
-RUNTIME_TOOL_ROOT = WORKSPACE_ROOT / ".runtime" / "agent-reach" / "home" / ".agent-reach" / "tools" / "wechat-article-for-ai"
-if str(RUNTIME_TOOL_ROOT) not in sys.path:
-    sys.path.insert(0, str(RUNTIME_TOOL_ROOT))
+LIB_ROOT = Path(__file__).resolve().parent.parent / "lib"
+if str(LIB_ROOT) not in sys.path:
+    sys.path.insert(0, str(LIB_ROOT))
 
 from wechat_to_md.converter import build_markdown, convert_html_to_markdown, replace_image_urls  # noqa: E402
 from wechat_to_md.downloader import download_all_images  # noqa: E402
