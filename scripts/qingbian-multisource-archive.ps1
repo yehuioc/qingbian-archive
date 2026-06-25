@@ -217,7 +217,8 @@ switch ($Action) {
 
     'run' {
         & pwsh -NoProfile -ExecutionPolicy Bypass -File $wechatScript -Action run -OutputRoot $wechatRoot
-        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        $wechatCode = $LASTEXITCODE
+        if ($wechatCode -notin @(0, 1)) { exit $wechatCode }
         $zhihuCode = 0
         if (-not $SkipZhihu) {
             $zhihuCode = Invoke-Zhihu -ZhihuAction run

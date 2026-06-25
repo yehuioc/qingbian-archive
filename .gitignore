@@ -9,3 +9,4 @@ automation/
 docs/handoff/
 scripts/legacy/
 scripts/__pycache__/
+ingestion/
