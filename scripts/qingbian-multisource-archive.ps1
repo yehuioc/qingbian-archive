@@ -97,23 +97,23 @@ function Invoke-Zhihu {
 }
 
 function Invoke-UnifiedIndex {
-    & $python $indexScript --strict | Out-Host
+    & $python $indexScript --repo-root $dataRoot --strict | Out-Host
     return $LASTEXITCODE
 }
 
 function Invoke-UnifiedCorpus {
-    & $python $corpusScript --strict | Out-Host
+    & $python $corpusScript --repo-root $dataRoot --strict | Out-Host
     return $LASTEXITCODE
 }
 
 function Invoke-Status {
-    $args = @($statusScript, '--format', $Format)
+    $args = @($statusScript, '--repo-root', $dataRoot, '--format', $Format)
     & $python @args | Out-Host
     return $LASTEXITCODE
 }
 
 function Invoke-PublishTime {
-    $args = @($publishTimeScript, '--format', $Format)
+    $args = @($publishTimeScript, '--repo-root', $dataRoot, '--format', $Format)
     & $python @args | Out-Host
     return $LASTEXITCODE
 }

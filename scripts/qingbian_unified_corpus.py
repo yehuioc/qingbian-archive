@@ -212,7 +212,7 @@ def write_markdown(path: Path, summary: dict[str, Any]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Materialize Qingbian WeChat + Zhihu records into one account-level corpus folder.")
-    parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[4]))
+    parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[1]))
     parser.add_argument("--index-root", default="")
     parser.add_argument("--output-root", default="")
     parser.add_argument("--no-clear", action="store_true")

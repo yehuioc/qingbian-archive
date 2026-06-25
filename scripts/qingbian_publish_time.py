@@ -141,7 +141,7 @@ def markdown(payload: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Infer Qingbian publish time and recommended archive schedule.")
-    parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[4]))
+    parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[1]))
     parser.add_argument("--format", choices=["json", "markdown"], default="markdown")
     args = parser.parse_args()
     payload = build_report(Path(args.repo_root).resolve())

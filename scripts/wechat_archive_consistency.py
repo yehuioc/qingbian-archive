@@ -280,7 +280,7 @@ def main() -> int:
     parser.add_argument("--archive-root", required=True)
     parser.add_argument("--account-name", required=True)
     parser.add_argument("--author-hint", default="")
-    parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[4]))
+    parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[1]))
     parser.add_argument("--runtime-home", default="")
     parser.add_argument("--repair", action="store_true")
     parser.add_argument("--refetch-missing", action="store_true")

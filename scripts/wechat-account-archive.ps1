@@ -35,9 +35,8 @@ $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $projectRoot = [System.IO.Path]::GetFullPath((Join-Path $scriptRoot '..'))
 $python = Join-Path $projectRoot 'venv\Scripts\python.exe'
 if (-not (Test-Path -LiteralPath $python)) {
-    $agentRuntimePython = Join-Path $repoRoot '.runtime\agent-reach\venv\Scripts\python.exe'
-    if (Test-Path -LiteralPath $agentRuntimePython) { $python = $agentRuntimePython }
-    else { $python = (Get-Command python -ErrorAction SilentlyContinue).Source }
+    $python = (Get-Command python -ErrorAction SilentlyContinue).Source
+    if (-not $python) { throw 'Python not found. Run: python -m venv venv && venv\Scripts\pip install -r requirements.txt' }
 }
 $ctx = @{ VenvPython = $python; RepoRoot = $projectRoot }
 
