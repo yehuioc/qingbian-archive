@@ -99,12 +99,14 @@ function Get-DefaultOutputRoot {
         return [System.IO.Path]::GetFullPath($OutputRoot)
     }
 
+    $dataRoot = if ($config -and $config.paths.data_root) { [System.IO.Path]::GetFullPath((Join-Path $projectRoot $config.paths.data_root)) } else { Join-Path $projectRoot 'data' }
+
     if ($Fresh) {
         $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-        return Join-Path $repoRoot "ingestion\10-Raw\WeChat\请辩-full-rerun-direct-$stamp"
+        return Join-Path $dataRoot "ingestion\10-Raw\WeChat\请辩-full-rerun-direct-$stamp"
     }
 
-    return Join-Path $repoRoot 'ingestion\10-Raw\WeChat\请辩'
+    return Join-Path $dataRoot 'ingestion\10-Raw\WeChat\请辩'
 }
 
 function Initialize-QingbianAlbumQueue {

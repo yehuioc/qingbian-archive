@@ -256,10 +256,11 @@ def main() -> int:
     parser.add_argument("--wechat-root", default="")
     parser.add_argument("--zhihu-root", default="")
     parser.add_argument("--output-root", default="")
+    parser.add_argument("--repo-root", default="")
     parser.add_argument("--strict", action="store_true")
     args = parser.parse_args()
 
-    repo_root = Path(__file__).resolve().parent.parent
+    repo_root = Path(args.repo_root).resolve() if args.repo_root else Path(__file__).resolve().parents[1]
     account_name = "\u8bf7\u8fa9"
     wechat_root = Path(args.wechat_root).resolve() if args.wechat_root else repo_root / "ingestion" / "10-Raw" / "WeChat" / account_name
     zhihu_root = Path(args.zhihu_root).resolve() if args.zhihu_root else repo_root / "ingestion" / "10-Raw" / "Zhihu" / account_name

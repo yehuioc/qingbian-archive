@@ -88,7 +88,8 @@ function Invoke-Zhihu {
     $args = @(
         $zhihuScript,
         '--action', $ZhihuAction,
-        '--user-token', 'qingbian'
+        '--user-token', 'qingbian',
+        '--output-root', $zhihuRoot
     )
     if ($effectiveZhihuCookieFile) { $args += @('--cookie-file', $effectiveZhihuCookieFile) }
     if ($ZhihuMaxItems -gt 0) { $args += @('--max-items', [string]$ZhihuMaxItems) }
@@ -199,7 +200,7 @@ function Register-QingbianTask {
 
 switch ($Action) {
     'doctor' {
-        & pwsh -NoProfile -ExecutionPolicy Bypass -File $wechatScript -Action progress
+        & pwsh -NoProfile -ExecutionPolicy Bypass -File $wechatScript -Action progress -OutputRoot $wechatRoot
         $wechatCode = $LASTEXITCODE
         if (-not $SkipZhihu) {
             $zhihuCode = Invoke-Zhihu -ZhihuAction doctor
@@ -215,7 +216,7 @@ switch ($Action) {
     }
 
     'run' {
-        & pwsh -NoProfile -ExecutionPolicy Bypass -File $wechatScript -Action run
+        & pwsh -NoProfile -ExecutionPolicy Bypass -File $wechatScript -Action run -OutputRoot $wechatRoot
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
         $zhihuCode = 0
         if (-not $SkipZhihu) {
@@ -240,7 +241,7 @@ switch ($Action) {
     }
 
     'audit' {
-        & pwsh -NoProfile -ExecutionPolicy Bypass -File $wechatScript -Action audit
+        & pwsh -NoProfile -ExecutionPolicy Bypass -File $wechatScript -Action audit -OutputRoot $wechatRoot
         $wechatCode = $LASTEXITCODE
         $zhihuCode = Invoke-Zhihu -ZhihuAction audit
         $indexCode = Invoke-UnifiedIndex
