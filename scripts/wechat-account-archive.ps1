@@ -35,10 +35,16 @@ $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $projectRoot = [System.IO.Path]::GetFullPath((Join-Path $scriptRoot '..'))
 $python = Join-Path $projectRoot 'venv\Scripts\python.exe'
 if (-not (Test-Path -LiteralPath $python)) {
-    $python = (Get-Command python -ErrorAction SilentlyContinue).Source
-    if (-not $python) { throw 'Python not found. Run: python -m venv venv && venv\Scripts\pip install -r requirements.txt' }
+    $agentRuntime = Join-Path $projectRoot '..\..\..\.runtime\agent-reach\venv\Scripts\python.exe'
+    if (Test-Path -LiteralPath $agentRuntime) { $python = $agentRuntime }
+    else {
+        $python = (Get-Command python -ErrorAction SilentlyContinue).Source
+        if (-not $python) { throw 'Python not found. Run: python -m venv venv && venv\Scripts\pip install -r requirements.txt' }
+    }
 }
-$ctx = @{ VenvPython = $python; RepoRoot = $projectRoot }
+$stateDir = Join-Path $projectRoot 'state'
+New-Item -ItemType Directory -Force -Path $stateDir | Out-Null
+$ctx = @{ VenvPython = $python; RepoRoot = $projectRoot; Home = $stateDir }
 
 $helper = Join-Path $PSScriptRoot 'wechat_account_archive.py'
 if (-not (Test-Path $helper)) {
